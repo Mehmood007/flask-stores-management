@@ -12,9 +12,9 @@
 
 ## Technologies Used
 
-| Python | Flask |
-|--------|--------|
-| <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="50"> | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/1280px-Flask_logo.svg.png" width="50"> |
+| Python | Flask | Docker |
+|--------|-------|--------|
+| <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="50"> | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/1280px-Flask_logo.svg.png" width="50"> | <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" width="50"> |
 
 ## Setup Locally
 - **First clone repo locally**  
@@ -24,9 +24,6 @@
 - **Navigate to Directory**   
 `cd flask-stores-management`
 
-- **Install Dependencies**  
-  - First make sure virtual environment is activated   
-`pip install -r requirements.txt`
-
-- **Run Server**  
-  `flask run`
+- **Run server**  
+  - First make sure you have docker installed on your system   
+`docker-compose up`
