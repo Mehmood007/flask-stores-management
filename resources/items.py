@@ -1,6 +1,7 @@
 import json
 
 from flask.views import MethodView
+from flask_jwt_extended import jwt_required
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -17,6 +18,7 @@ class Item(MethodView):
     Request handling related to specific Item
     '''
 
+    @jwt_required()
     @blp.response(200, ItemSchema)
     def get(self, item_id: int) -> json:
         '''
@@ -25,6 +27,7 @@ class Item(MethodView):
         item = ItemModel.query.get_or_404(item_id)
         return item
 
+    @jwt_required()
     def delete(self, item_id: str) -> json:
         '''
         Delete specific Item
@@ -34,6 +37,7 @@ class Item(MethodView):
         db.session.commit()
         return {'message': 'Item deleted successfully'}
 
+    @jwt_required()
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemSchema)
     def put(self, item_data: ItemUpdateSchema, item_id: str) -> json:
@@ -59,6 +63,7 @@ class Items(MethodView):
     Request handling related to all items
     '''
 
+    @jwt_required()
     @blp.response(200, ItemSchema(many=True))
     def get(self) -> json:
         '''
@@ -66,6 +71,7 @@ class Items(MethodView):
         '''
         return ItemModel.query.all()
 
+    @jwt_required()
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)
     def post(self, item_data: ItemSchema) -> json:

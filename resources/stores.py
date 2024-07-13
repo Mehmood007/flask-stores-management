@@ -1,6 +1,7 @@
 import json
 
 from flask.views import MethodView
+from flask_jwt_extended import jwt_required
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
@@ -17,6 +18,7 @@ class Store(MethodView):
     Request handling related to specific store
     '''
 
+    @jwt_required()
     @blp.response(200, StoreSchema)
     def get(self, store_id: str) -> json:
         '''
@@ -25,6 +27,7 @@ class Store(MethodView):
         store = StoreModel.query.get_or_404(store_id)
         return store
 
+    @jwt_required()
     def delete(self, store_id: str) -> json:
         '''
         Delete specific store
@@ -41,6 +44,7 @@ class Stores(MethodView):
     Request handling related to all stores
     '''
 
+    @jwt_required()
     @blp.response(200, StoreSchema(many=True))
     def get(self) -> json:
         '''
@@ -48,6 +52,7 @@ class Stores(MethodView):
         '''
         return StoreModel.query.all()
 
+    @jwt_required()
     @blp.arguments(StoreSchema)
     @blp.response(201, StoreSchema)
     def post(self, store_data: StoreSchema) -> json:
